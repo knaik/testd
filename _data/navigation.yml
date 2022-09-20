@@ -1,8 +1,17 @@
 links:
-- title: Home
+- title: knaik
   url: /
 - title: Tags
   url: /tags/
+- title: Reading
+  url: /books
+- title: Movies
+  url: /movies
+- title: Music
+  url: /music
+- title: Categories
+  url: /categories/
 - title: Search
   url: /search
-
+- title: knaik
+  url: /knaik

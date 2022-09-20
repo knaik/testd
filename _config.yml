@@ -1,8 +1,7 @@
 site: blog
-url: github.com
+url: 
 title: blog
-description: a personal nontech blog
-lang: en-US
+description: blog
 twitter:
   username: 
   card: 
