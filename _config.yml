@@ -1,133 +1,93 @@
-email: fanxiaobin422@gamil.com
-author: Vanhiupun
-title: Vanhiupun's Awesome Site
-description: >- #这意味着在“baseurl:”之前忽略换行符
-  影视分享｜Netflix｜科学上网｜网络技术｜梅林｜OpenWrt｜Jekyll博客｜Git｜
-baseurl: "" # 您网站的子路径，例如 /blog
-url: "https://vanhiupun.github.io/" # 您站点的基本主机名和协议，例如 e.g. http://example.com
-favicon: "/favicon.png" # 您网站的图标
-permalink: date
+site: Gesko
+title: Gesko
+greetings: Hi 👋
+description: >-
+  just a minimalist, personal blog
+lang: en-US
+timezone:  Europe/Rome
+repo: https://github.com/DavideBrie/Gesko # site repo [optional]
+data-theme: dark # default theme "dark" | "light"
+discus-identifier: powex # replace with your disqus shortname
 
-# 版权设置
-# * 您可以使用任何 html 代码，目前以下占位符可用：
-# * 当前年份：{currentYear}
-# * 作者: {author}（值与site.author相同）
-# * 版权：(c) - ©
-# * 公共版权: (cleft)
-# * 录音版权：(p) - ℗
-#例如：
-#    "Copyright (c) 2017-{currentYear} <a href=https://example.com>{author}</a>"
-#    “版权所有 © 2017-2021 Foobar”
+author:
+  name: gesko
+  bio: just a minimalist, personal blog
+  userpicture: 
+  username: # general username
+  github: # github username
+  twitter: # twitter username
+  email: your-email@email.com # email adress
 
-copyright: "Copyright (c) 2017-{currentYear} <a href='https://github.com/vanhiupun/' target='_blank'>{author}</a>"
+# Font Settings
+googlewebfonts: family=Play:wght@400;700&family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,300;1,400;1,500;1,600;1,700;1,900
 
-yat:
-  date_format: "%b %d, %Y"
+# URL settings
+url: "https://DavideBrie.github.io" # Domain Name of host. [username].github.io for github pages
+baseurl: "/Gesko" # sub folder for jekyll site. only if jekyll site not in root of host. leave blank if not wishd. always add / in front.
+permalink: pretty
 
-# Build settings
+# local
+# url: "http://localhost:4000" # 
+# baseurl: "" # 
+
+
 markdown: kramdown
-#highlighter: rouge
 kramdown:
   input: GFM
-  #syntax_highlighter: rouge
+  syntax_highlighter: rouge
+
+
+exclude:
+  - .jekyll-cache
+  - .obsidian
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE.md
+  - README.md
+  - CONTRIBUTING.md
   
-# Disqus 评论
-disqus:
- shortname: "vanhiupun"
+compress_html:
+  clippings: all
+  comments: ["<!-- ", " -->"]
 
-# 摘录大小设置
-excerpt_size: 150
-
-# 如果要生成网站站点地图，可以设置为true
-sitemap: true
-
-# 分页设置
-paginate: 10
-
-# 如果您只想链接标题中的特定页面，请取消注释
-# 按顺序添加页面的路径
-header_pages:
-  - index.html
-  - archives.html
-  - categories.html
-  - tags.html
-  - about.md
-
-# Google Analytics
-google_analytics: "UA-212989441-1"    # 你用Google账号去注册一个就会给你一个这样的id
-enableDNT: true
-
-#如果要改变内容宽度，可以设置为其他值
-content_width: "1080px"
-
-# 文章图标设置
-# 您可以启用或禁用文章图标等
-code_badge:
-  enabled: "true"
-  color: "#fff"
-  background_color: "#ff4e00"
-  text_transform: "uppercase"  # ("uppercase", "lowercase", "capitalize")
-
-# admin 页面 
-# jekyll_admin:
-#   hidden_links:
-#     - posts
-#     - pages
-#     - staticfiles
-#     - datafiles
-#     - configuration
-#   homepage: "pages"
-
-# Gitment 评论
-#gitment:
-#  username: "" # github用户名
-#  repo: "" # 仓库名称
-#  client_id: "" # Client ID
-#  client_secret: "" # Client secrets
-#  redirect_uri: "" # 如果你使用自定义域名
-
-# Translate languges
-translate_langs: []
-
-#如果你想改变网站语言，你可以设置 lang 选项
-#lang: "en" # 默认语言为 en
-
-#可以选择主题颜色
-#默认主题颜色如下：
-# coolblack: #090a0b
-# spacegrey: #353535
-# snowwhite: #ffffff
-#
-theme_color: snowwhite
-#
-# 自定义颜色如下:
-# theme_color: "#882250"
-
-#您可以选择品牌颜色
-#默认品牌颜色如下：
-# orangered: #ff5100
-# greatgold: #f2cb05
-# greenblue: #389092
-#
-# brand_color: orangered
-#
-#自定义颜色如下：
-# brand_color： "＃1a8e42"
-
-#如果你想要更多的调试日志，你可以设置为true
-debug: true
-
-#如果你不想要透明的header，你可以设置false
-header_transparent: true
-
-# remote_theme : "jeffreytse/jekyll-theme-yat"
+sass:
+  sass_dir: _sass
+  style: compressed
 
 plugins:
-  - jekyll-feed
-  - jekyll-seo-tag
-  - jekyll-sitemap
   - jekyll-paginate
-  - jekyll-spaceship
-  - jekyll-admin
-  - jemoji
-  - webrick
+  - jekyll-sitemap
+  - jekyll-relative-links
+
+collections:
+  pages:
+    output: true
+    permalink: /:name
+  posts:
+    output: true
+    permalink: /:year/:month/:day/:slug
+  
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+relative_links:
+  enabled:     true
+  collections: false
+
+
