@@ -1,99 +1,46 @@
-# Encrypted content for Jekyll
+# jekyll-firewall
+Password protect Jekyll posts.
 
-Symmetrically encrypts posts.  You can securely share URLs and give out
-password so only trusted visitors can read the site.  It should work
-with any Jekyll theme without modification :)
+![Demo](https://github.com/lllychen/jekyll-firewall/blob/master/demo.gif)
 
-**Important!!** Since passwords are stored in posts, this plugin is for
-private repositories only!
+## Disclaimers
+Before using, keep the following in mind:
+
+- This encryption type is weak against brute force attacks. [Here](https://github.com/lllychen/jekyll-firewall/pull/3/commits/038ce8e143d1749375137589fca8e1401a82f4bf) is an example of a safe guard by [mrlubos](https://github.com/mrlubos).
+- Liquid templating isn't currently supported in protected posts
+- Use only Markdown syntax supported by [marked](https://marked.js.org)
+- The password needs to be entered for each protected post. But you can easily store a successful password in cache and bypass subsequent logins
+- I discourage storing your site in a public repository unless you are okay with gitignoring sensitive information (and have no remote backup)
 
 ## Installation
+To begin a new site, build on top of this repository by forking or cloning.
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'jekyll-crypto'
-```
-
-And then execute:
-
-    $ bundle install
-
-Or install it yourself as:
-
-    $ gem install jekyll-crypto
+To integrate with an existing Jekyll site, below are the necessary files:
+- `_layouts/encrypted` &mdash; The layout for a locked page
+- `gulpfile` &mdash; The Gulp file to encrypt posts
 
 ## Usage
+### Site Structure &amp; Password
+The `encrypt` gulp task (below) encrypts each file in `SRC-FOLDER` with `PASSWORD` and outputs it into `DEST-FOLDER`. Change these settings in `gulpfile.js` according to your site structure.
 
-Add a `password` attribute either to each post front matter or globally
-into `_config.yml`.
-
-```
----
-layout: post
-password: '12345678'
-title: 'Some metadata is not encrypted yet'
-description: "Don't forget to add a description since some themes use content!"
----
-
-Content to be encrypted
+``` js
+gulp.task('encrypt', () => {
+  return gulp.src('SRC-FOLDER')
+    .pipe(encrypt('PASSWORD'))
+    .pipe(gulp.dest('DEST-FOLDER'));
+});
 ```
 
-During site build the plugin will replace the content with an encrypted
-version, the decryption parameters and a Javascript snippet that asks
-visitors for a password.  If the password is correct, the content is
-replaced by the plain text version :)
+Heads up that if you write public posts to `DEST-FOLDER`, it may be difficult to distinguish the public and protected posts. This can be easily amended but is outside the scope of the skeleton site in this repo. However, you can adjust the gulp `encrypt` task to change the outputted filename of protected files in the `DEST-FOLDER` and set the url in the front matter.
 
-You can prevent an article from being encrypted by setting password to
-`false`.  It also accepts the string `'false'`.  So this means you can't
-use "false" as a password :P
+### Protect Posts
+To encrypt a post, simply save it in your desinated `SRC-FOLDER` and run `gulp`.
 
-## Development
+## Credit
+### Libraries
+- [cryptojs](https://github.com/brix/crypto-js)
+- [markedjs](https://github.com/markedjs/marked)
 
-After checking out the repo, run `bin/setup` to install
-dependencies. Then, run `rake test` to run the tests. You can also run
-`bin/console` for an interactive prompt that will allow you to
-experiment.
-
-To install this gem onto your local machine, run `bundle exec rake
-install`. To release a new version, update the version number in
-`version.rb`, and then run `bundle exec rake release`, which will create
-a git tag for the version, push git commits and tags, and push the
-`.gem` file to [rubygems.org](https://rubygems.org).
-
-### FAQ (It doesn't work!)
-
-* **Nothing happens when I input the password and submit the form.**
-  Chrome only exposes the CryptoSubtle API on secure locations.  You can
-  try setting up your own CA for development (using
-  [sutty.local](https://0xacab.org/sutty/sutty.local)) or upload your
-  site to a server with HTTPS enabled.
-
-### TODO (help wanted!)
-
-* Encrypt front matter
-* Show useful errors?
-
-## Contributing
-
-Bug reports and pull requests are welcome on 0xacab at
-<https://0xacab.org/sutty/jekyll/jekyll-crypto>. This project is
-intended to be a friendly and welcoming space for collaboration, and
-contributors are expected to adhere to the [code of
-conduct](https://sutty.nl/en/code-of-conduct/).
-
-This project took ~9 hours to get to a working proof of concept.  If you
-appreciate our work, you can donate
-[Bitcoin](bitcoin:3KCV7dBgJbkTuF4Lz2BxVu6bVUf9fRyp6z?label=jekyll-crypto&message=Thanks+for+jekyll-crypto)
-or contact us for other ways :)
-
-## License
-
-The gem is available as free software under the terms of the GPL3
-License.
-
-## Code of Conduct
-
-Everyone interacting in the jekyll-crypto project's codebases, issue
-trackers, chat rooms and mailing lists is expected to follow the [code
-of conduct](https://sutty.nl/en/code-of-conduct/).
+### Contributors
+- [mrlubos](https://github.com/mrlubos)
+- [Firefox2100](https://github.com/Firefox2100)
