@@ -1,0 +1,4 @@
+password: '12345678'
+theme: minima
+exclude:
+  - lib
